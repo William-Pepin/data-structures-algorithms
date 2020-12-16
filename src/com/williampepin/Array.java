@@ -71,7 +71,7 @@ public class Array {
             System.out.println(items[i]);
         }
     }
-    // TODO Rendre le type dynamique
+    // TODO Rendre le type generic
     // TODO max() return the largest number
     // TODO intersect() compares two array and return the number
     // that have the same value in each of them
