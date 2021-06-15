@@ -2,7 +2,7 @@ package com.williampepin;
 
 import java.util.NoSuchElementException;
 
-public class LinkedList {
+public class LinkedList<E extends Comparable<E>> {
     private Node first;
     private Node last;
     private int size = 0;
@@ -11,7 +11,7 @@ public class LinkedList {
         return size;
     }
 
-    public void addFirst(int item){
+    public void addFirst(E item){
         var node = new Node(item);
 
         if (isEmpty())
@@ -23,7 +23,7 @@ public class LinkedList {
         size++;
     }
 
-    public void addLast(int item){
+    public void addLast(E item){
         var node = new Node(item);
 
         if (isEmpty())
@@ -35,10 +35,9 @@ public class LinkedList {
         size++;
     }
 
-    public int removeFirst(){
-        if (isEmpty()) {
+    public E removeFirst(){
+        if (isEmpty())
             throw new NoSuchElementException();
-        }
 
         var removed = first;
         if(hasOneItem()) {
@@ -52,11 +51,11 @@ public class LinkedList {
         return removed.value;
     }
 
-    public int removeLast(){
+    public E removeLast(){
         if(isEmpty())
             throw new NoSuchElementException();
 
-        var removed = last;
+        var removed  = last;
         if(hasOneItem()) {
             first = last = null;
         }else{
@@ -68,31 +67,30 @@ public class LinkedList {
         return removed.value;
     }
 
-    public int IndexOf(int item){
+    public int IndexOf(E item){
         int index = 0;
         var current = first;
         while(current != null) {
-            if (current.value == item) return index;
+            if (current.value.equals(item)) return index;
             current = current.next;
             index++;
         }
         return -1;
     }
 
-    public boolean contains(int item){
+    public boolean contains(E item){
         return IndexOf(item) != -1;
     }
 
-    public int[] toArray(){
-        int[] array = new int[size];
+    public E[] toArray(){
+        Comparable<E>[] array = new Comparable[size];
         var current = first;
         var index = 0;
         while (current != null){
             array[index++] = current.value;
             current = current.next;
         }
-
-        return array;
+        return (E[]) array;
     }
 
     public void reverse(){
@@ -111,7 +109,7 @@ public class LinkedList {
         first = previous;
     }
 
-    public int getKthFromEnd(int k){
+    public E getKthFromEnd(int k){
         if(isEmpty())
             throw new IllegalStateException();
         if(k > size)
@@ -124,7 +122,6 @@ public class LinkedList {
             // if the size is unknown
             // if (b == null)
             //    throw new IllegalArgumentException();
-
         }
         while (b != last){
             a = a.next;
@@ -132,7 +129,6 @@ public class LinkedList {
         }
         return a.value;
     }
-
 
     private boolean isEmpty(){
         return first == null;
@@ -152,10 +148,10 @@ public class LinkedList {
     }
 
     private class Node {
-        private int value;
+        private E value;
         private Node next;
 
-        public Node(int value){
+        public Node(E value){
             this.value = value;
         }
     }

@@ -1,11 +1,11 @@
 package com.williampepin;
 
-public class Stack {
-    int items[];
-    int count;
+public class Stack<E extends Comparable<E>> {
+    private Comparable[] items;
+    private int count;
 
     public Stack(int size){
-        items = new int[size];
+        items = new Comparable[size];
         count = 0;
     }
 
@@ -17,16 +17,16 @@ public class Stack {
         count++;
     }
 
-    public int pop() {
+    public E pop() {
         if(empty())
             throw new IllegalStateException();
-        return items[--count];
+        return (E) items[--count];
     }
 
-    public int peek() {
+    public E peek() {
         if(empty())
             throw new IllegalStateException();
-        return items[count];
+        return (E) items[count];
     }
     public boolean empty(){
         return count == 0;

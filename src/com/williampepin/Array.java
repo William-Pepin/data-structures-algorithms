@@ -1,19 +1,19 @@
 package com.williampepin;
 
-public class Array {
-    private int[] items;
+public class Array<E extends Comparable<E>>   {
+    private Comparable[] items;
     private int count;
 
+    public Array(){items = new Comparable[count = 10]; };
     public Array(int length){
-    items = new int[length];
+    items  = new Comparable[length];
     }
 
-    public void insert(int item){
+    public void insert(E item){
         if(items.length == count){
-            int[] newItems = new int[count*2];
-            for (int i = 0; i < count; i++) {
+            Comparable[] newItems = new Comparable[count*2];
+            for (int i = 0; i < count; i++)
                 newItems[i] = items[i];
-            }
             items = newItems;
         }
         items[count++] = item;
@@ -29,17 +29,17 @@ public class Array {
         }
     }
 
-    public int indexOf(int item) {
+    public int indexOf(E item) {
         for (int i = 0; i < count; i++) {
-            if (items[i] == item)
+            if (items[i].equals(item))
                 return i;
         }
         return -1;
     }
 
-    public int lastIndexOf(int item){
+    public int lastIndexOf(E item){
         for (int i = count -1; i > -1; i++){
-            if(items[i] == item){
+            if(items[i].equals(item)){
                 return i;
             }
         }
@@ -52,18 +52,18 @@ public class Array {
 
     public boolean contains(int item){
         for (int i = 0; i < count; i++) {
-            if(items[i] == item)
+            if(items[i].equals(items))
                 return true;
         }
         return false;
     }
 
-    public int[] toArray(){
-        int[] newItems = new int[count];
+    public E[] toArray(){
+        Comparable[] newItems = new Comparable[count];
         for (int i = 0; i < count; i++) {
             newItems[i] = items[i];
         }
-        return newItems;
+        return (E[]) newItems;
     }
 
     public void print(){
@@ -71,10 +71,8 @@ public class Array {
             System.out.println(items[i]);
         }
     }
-    // TODO Rendre le type generic
     // TODO max() return the largest number
-    // TODO intersect() compares two array and return the number
-    // that have the same value in each of them
+    // TODO intersect() compares two array and return the number that have the same value in each of them
     // TODO reverse() reverses the array
     // TODO insertAt() insert at specified index
 }
